@@ -2,6 +2,18 @@
 """Generates the Zelenice redesign pages into ./site from shared templates."""
 import os, re, json, html as H
 
+# Referral visit tracking: only loads when the URL carries ?r=<code>.
+TRACK = """<script>
+(function () {
+  if (!/[?&]r=/.test(location.search)) return;
+  var s = document.createElement('script');
+  s.async = true;
+  s.referrerPolicy = 'no-referrer';
+  s.setAttribute('data-landing', location.href);
+  s.src = 'https://phplaravel-758037-6569212.cloudwaysapps.com/v/script.js';
+  document.head.appendChild(s);
+})();
+</script>"""
 ON = ' class="on"'
 JOB = ' data-job'
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -147,6 +159,7 @@ def page(fn, title, body, active='', light=False, desc='', extra_cls=''):
 <link rel="preload" href="assets/fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
 <script>document.documentElement.classList.remove('no-js');if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('reduce')</script>
+{TRACK}
 </head>
 <body class="{extra_cls}">
 {header(active, light)}
