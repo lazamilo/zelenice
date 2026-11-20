@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+# raw crawl downloads and research scratch (large, regenerable)
+source/raw/
+source/brochure/
+source/refs/
+source/sheet/
+source/*.html
+# original stock footage before encoding (licensed source files)
+source/video/
+.claude/
